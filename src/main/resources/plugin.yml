@@ -1,0 +1,7 @@
+name: LoreVoter
+version: '${project.version}'
+main: com.mradhit.lorevoter.LoreVoter
+api-version: 1.17
+prefix: LoreVoter
+depend: [ Votifier ]
+authors: [ MrAdhit ]
