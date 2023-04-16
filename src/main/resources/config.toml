@@ -1,0 +1,14 @@
+[vote.player]
+cache_file = "cache/savedvoter.bin"
+rewards = [
+    "give {username} wooden_sword",
+    "give {username} dirt"
+]
+
+[vote.party]
+goal = 22
+cache_file = "cache/voteparty.bin"
+rewards = [
+    "give @a wooden_sword",
+    "give @a dirt"
+]
