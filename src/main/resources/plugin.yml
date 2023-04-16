@@ -5,3 +5,7 @@ api-version: 1.17
 prefix: LoreVoter
 depend: [ Votifier ]
 authors: [ MrAdhit ]
+commands:
+  lorevote:
+    description: LoreVoter plugin commands
+    permission: lorevote.admin

@@ -44,6 +44,22 @@ public class LoreVoterConfigFile {
         return this.config.vote;
     }
 
+    public void saveConfig() {
+        TomlWriter tomlWriter = new TomlWriter();
+
+        try {
+            tomlWriter.write(this.config, this.configFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reloadConfig() {
+        LoreVoter.logger.warning("Reloading Config Files!");
+        Toml toml = new Toml().read(this.configFile);
+        this.config = toml.to(Config.class);
+    }
+
     public static class VotePlayer {
         public List<String> rewards = Arrays.asList("give {username} wooden_sword", "give {username} dirt");
         String cache_file = "cache/savedvoter.bin";

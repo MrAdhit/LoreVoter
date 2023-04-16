@@ -14,6 +14,7 @@ public class VotePartyListener implements Listener {
     public void OnVoteParty(VotePartyEvent event) {
         if (event.voteAmount >= config.getConfig().party.goal) {
             votePartyManager.execute();
+            votePartyManager.reset();
         }
     }
 }

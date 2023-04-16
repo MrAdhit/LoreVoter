@@ -11,7 +11,7 @@ import java.util.List;
 public class VotePartyManager {
     private static VotePartyManager INSTANCE;
 
-    private static final LoreVoterConfigFile config = LoreVoterConfigFile.getInstance();
+    private final LoreVoterConfigFile config = LoreVoterConfigFile.getInstance();
     private final VotePartyCacheFile cacheFile = VotePartyCacheFile.getInstance();
 
     public static VotePartyManager getInstance() {
@@ -23,6 +23,10 @@ public class VotePartyManager {
     }
 
     private VotePartyManager() { }
+
+    public int get() {
+        return this.cacheFile.cache;
+    }
 
     public void add() {
         this.cacheFile.cache += 1;
@@ -42,10 +46,21 @@ public class VotePartyManager {
         this.cacheFile.write();
     }
 
+    public void set(int amount) {
+        this.cacheFile.cache = amount;
+        Bukkit.getPluginManager().callEvent(new VotePartyEvent(this.cacheFile.cache));
+        this.cacheFile.write();
+    }
+
+    public void setMax(int amount) {
+        this.config.getConfig().party.goal = amount;
+        this.config.saveConfig();
+    }
+
     public void execute() {
         LoreVoter.logger.info("VoteParty Rewards Executed!");
 
-        List<String> rewards = config.getConfig().party.rewards;
+        List<String> rewards = this.config.getConfig().party.rewards;
         for (String reward : rewards) {
             LoreVoter.plugin.getServer().dispatchCommand(LoreVoter.plugin.getServer().getConsoleSender(), reward);
         }
