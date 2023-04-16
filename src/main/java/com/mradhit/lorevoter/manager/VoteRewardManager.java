@@ -1,8 +1,13 @@
 package com.mradhit.lorevoter.manager;
 
 import com.mradhit.lorevoter.LoreVoter;
+import com.mradhit.lorevoter.file.LoreVoterConfigFile;
+
+import java.util.List;
 
 public class VoteRewardManager {
+    private static final LoreVoterConfigFile config = LoreVoterConfigFile.getInstance();
+
     private final String username;
 
     public VoteRewardManager(String username) {
@@ -11,6 +16,11 @@ public class VoteRewardManager {
 
     public void execute() {
         LoreVoter.logger.info("Gifting vote rewards to " + this.username);
-        LoreVoter.plugin.getServer().dispatchCommand(LoreVoter.plugin.getServer().getConsoleSender(), "give " + username + " wooden_sword");
+
+        List<String> rewards = config.getConfig().player.rewards;
+        for (String reward : rewards) {
+            String processor = reward.replaceAll("\\{username}", this.username);
+            LoreVoter.plugin.getServer().dispatchCommand(LoreVoter.plugin.getServer().getConsoleSender(), processor);
+        }
     }
 }

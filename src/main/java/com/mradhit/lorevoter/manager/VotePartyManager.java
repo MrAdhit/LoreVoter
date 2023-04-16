@@ -1,12 +1,17 @@
 package com.mradhit.lorevoter.manager;
 
+import com.mradhit.lorevoter.LoreVoter;
 import com.mradhit.lorevoter.event.VotePartyEvent;
+import com.mradhit.lorevoter.file.LoreVoterConfigFile;
 import com.mradhit.lorevoter.file.VotePartyCacheFile;
 import org.bukkit.Bukkit;
+
+import java.util.List;
 
 public class VotePartyManager {
     private static VotePartyManager INSTANCE;
 
+    private static final LoreVoterConfigFile config = LoreVoterConfigFile.getInstance();
     private final VotePartyCacheFile cacheFile = VotePartyCacheFile.getInstance();
 
     public static VotePartyManager getInstance() {
@@ -38,6 +43,11 @@ public class VotePartyManager {
     }
 
     public void execute() {
-        // TODO: execute command when vote party goal is reached
+        LoreVoter.logger.info("VoteParty Rewards Executed!");
+
+        List<String> rewards = config.getConfig().party.rewards;
+        for (String reward : rewards) {
+            LoreVoter.plugin.getServer().dispatchCommand(LoreVoter.plugin.getServer().getConsoleSender(), reward);
+        }
     }
 }

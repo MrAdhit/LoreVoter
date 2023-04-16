@@ -1,5 +1,6 @@
 package com.mradhit.lorevoter;
 
+import com.mradhit.lorevoter.file.LoreVoterConfigFile;
 import com.mradhit.lorevoter.file.VoterCacheFile;
 import com.mradhit.lorevoter.listener.PlayerJoinListener;
 import com.mradhit.lorevoter.listener.VotePartyListener;
@@ -20,6 +21,7 @@ public final class LoreVoter extends JavaPlugin {
 
         logger.info("Loading Plugin");
 
+        LoreVoterConfigFile.getInstance();
         VoterCacheFile.getInstance();
         VotePartyManager.getInstance();
 

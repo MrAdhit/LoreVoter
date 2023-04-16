@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 public class VoterCacheFile {
     private static VoterCacheFile INSTANCE;
+    private static final LoreVoterConfigFile config = LoreVoterConfigFile.getInstance();
+
     public HashMap<String, Integer> cache;
     private File cacheFile;
 
@@ -20,7 +22,7 @@ public class VoterCacheFile {
 
     private VoterCacheFile() {
         try {
-            this.cacheFile = new File(LoreVoter.plugin.getDataFolder(), "votercache.bin");
+            this.cacheFile = new File(LoreVoter.plugin.getDataFolder(), config.getConfig().player.cache_file);
             this.cacheFile.getParentFile().mkdirs();
             this.cacheFile.createNewFile();
 

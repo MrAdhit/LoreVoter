@@ -43,6 +43,32 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>me.lucko:commodore</include>
+                                </includes>
+                            </artifactSet>
+                            <relocations>
+                                <relocation>
+                                    <pattern>me.lucko.commodore</pattern>
+                                    <shadedPattern>com.mradhit.lorevoter.commodore</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -53,10 +79,7 @@
     </build>
 
     <repositories>
-        <repository>
-            <id>jitpack</id>
-            <url>https://jitpack.io</url>
-        </repository>
+
         <repository>
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
@@ -64,6 +87,14 @@
         <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>minecraft-repo</id>
+            <url>https://libraries.minecraft.net/</url>
+        </repository>
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
@@ -79,6 +110,17 @@
             <artifactId>nuvotifier-bukkit</artifactId>
             <version>fcf6c93404</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.moandjiezana.toml</groupId>
+            <artifactId>toml4j</artifactId>
+            <version>0.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>me.lucko</groupId>
+            <artifactId>commodore</artifactId>
+            <version>1.13</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
