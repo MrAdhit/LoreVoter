@@ -3,7 +3,7 @@ version: '${project.version}'
 main: com.mradhit.lorevoter.LoreVoter
 api-version: 1.17
 prefix: LoreVoter
-depend: [ Votifier ]
+depend: [ Votifier, PlaceholderAPI ]
 authors: [ MrAdhit ]
 commands:
   lorevote:

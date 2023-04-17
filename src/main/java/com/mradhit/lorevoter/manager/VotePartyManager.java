@@ -57,6 +57,10 @@ public class VotePartyManager {
         this.config.saveConfig();
     }
 
+    public int getMax() {
+        return this.config.getConfig().party.goal;
+    }
+
     public void execute() {
         LoreVoter.logger.info("VoteParty Rewards Executed!");
 

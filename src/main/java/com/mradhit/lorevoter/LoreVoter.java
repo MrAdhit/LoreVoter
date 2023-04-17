@@ -8,6 +8,7 @@ import com.mradhit.lorevoter.listener.PlayerJoinListener;
 import com.mradhit.lorevoter.listener.VotePartyListener;
 import com.mradhit.lorevoter.listener.VotifierListener;
 import com.mradhit.lorevoter.manager.VotePartyManager;
+import com.mradhit.lorevoter.placeholder.LoreVoterExpansion;
 import me.lucko.commodore.Commodore;
 import me.lucko.commodore.CommodoreProvider;
 import me.lucko.commodore.file.CommodoreFileReader;
@@ -35,6 +36,8 @@ public final class LoreVoter extends JavaPlugin {
         plugin.getServer().getPluginManager().registerEvents(new VotifierListener(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new VotePartyListener(), plugin);
+
+        new LoreVoterExpansion().register();
 
         PluginCommand lorevoteCommand = plugin.getCommand("lorevote");
         lorevoteCommand.setExecutor(new LoreVoteCommand());
