@@ -13,5 +13,10 @@ rewards = [
     "give @a dirt"
 ]
 
+[vote.party.chance_rewards]
+5 = ["give {username} netherite_hoe", "give {username} stick 64"]
+10 = ["give {username} wooden_sword", "give {username} wooden_hoe"]
+90 = ["give {username} dirt"]
+
 [broadcast]
 message = "&c&l{username}&r just voted using &a&l{service}"

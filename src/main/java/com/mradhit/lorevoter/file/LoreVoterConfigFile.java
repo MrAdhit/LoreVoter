@@ -6,6 +6,7 @@ import com.mradhit.lorevoter.LoreVoter;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class LoreVoterConfigFile {
@@ -69,6 +70,7 @@ public class LoreVoterConfigFile {
         public int goal = 20;
         public List<String> rewards = Arrays.asList("give @a wooden_sword", "give @a dirt");
         String cache_file = "cache/voteparty.bin";
+        public HashMap<Integer, List<String>> chance_rewards = new HashMap<>();
     }
 
     public static class Broadcast {

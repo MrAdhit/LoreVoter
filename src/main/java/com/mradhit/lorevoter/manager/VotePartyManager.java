@@ -5,8 +5,10 @@ import com.mradhit.lorevoter.event.VotePartyEvent;
 import com.mradhit.lorevoter.file.LoreVoterConfigFile;
 import com.mradhit.lorevoter.file.VotePartyCacheFile;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class VotePartyManager {
     private static VotePartyManager INSTANCE;
@@ -64,9 +66,26 @@ public class VotePartyManager {
     public void execute() {
         LoreVoter.logger.info("VoteParty Rewards Executed!");
 
-        List<String> rewards = this.config.getConfig().vote.party.rewards;
-        for (String reward : rewards) {
+        for (String reward : this.config.getConfig().vote.party.rewards) {
             LoreVoter.plugin.getServer().dispatchCommand(LoreVoter.plugin.getServer().getConsoleSender(), reward);
+        }
+
+        Set<Integer> rewardChance = this.config.getConfig().vote.party.chance_rewards.keySet();
+        int totalRandom = 0;
+        for (Integer chance : rewardChance) {
+            totalRandom += chance;
+        }
+
+        for (Player player : LoreVoter.plugin.getServer().getOnlinePlayers()) {
+            Random r = new Random();
+            int random = r.nextInt(totalRandom);
+
+            Integer rewardChosen = rewardChance.stream().min(Comparator.comparingInt(i -> Math.abs(i - random))).orElse(0);
+
+            for (String reward : this.config.getConfig().vote.party.chance_rewards.get(rewardChosen)) {
+                String processor = reward.replaceAll("\\{username}", player.getName());
+                LoreVoter.plugin.getServer().dispatchCommand(LoreVoter.plugin.getServer().getConsoleSender(), processor);
+            }
         }
     }
 }
