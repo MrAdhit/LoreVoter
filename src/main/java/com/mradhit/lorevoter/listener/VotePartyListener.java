@@ -12,7 +12,7 @@ public class VotePartyListener implements Listener {
 
     @EventHandler
     public void OnVoteParty(VotePartyEvent event) {
-        if (event.voteAmount >= config.getConfig().party.goal) {
+        if (event.voteAmount >= config.getConfig().vote.party.goal) {
             votePartyManager.execute();
             votePartyManager.reset();
         }

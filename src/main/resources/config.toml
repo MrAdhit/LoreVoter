@@ -12,3 +12,6 @@ rewards = [
     "give @a wooden_sword",
     "give @a dirt"
 ]
+
+[broadcast]
+message = "&c&l{username}&r just voted using &a&l{service}"

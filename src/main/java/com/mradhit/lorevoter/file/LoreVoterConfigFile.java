@@ -40,8 +40,8 @@ public class LoreVoterConfigFile {
         }
     }
 
-    public Vote getConfig() {
-        return this.config.vote;
+    public Config getConfig() {
+        return this.config;
     }
 
     public void saveConfig() {
@@ -71,12 +71,17 @@ public class LoreVoterConfigFile {
         String cache_file = "cache/voteparty.bin";
     }
 
+    public static class Broadcast {
+        public String message = "&c&l{username}&r just voted using &a&l{service}";
+    }
+
     public static class Vote {
         public VotePlayer player = new VotePlayer();
         public VoteParty party = new VoteParty();
     }
 
     public static class Config {
-        Vote vote = new Vote();
+        public Vote vote = new Vote();
+        public Broadcast broadcast = new Broadcast();
     }
 }

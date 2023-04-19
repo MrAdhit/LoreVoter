@@ -22,7 +22,7 @@ public class VoterCacheFile {
 
     private VoterCacheFile() {
         try {
-            this.cacheFile = new File(LoreVoter.plugin.getDataFolder(), config.getConfig().player.cache_file);
+            this.cacheFile = new File(LoreVoter.plugin.getDataFolder(), config.getConfig().vote.player.cache_file);
             this.cacheFile.getParentFile().mkdirs();
             this.cacheFile.createNewFile();
 

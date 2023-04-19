@@ -53,18 +53,18 @@ public class VotePartyManager {
     }
 
     public void setMax(int amount) {
-        this.config.getConfig().party.goal = amount;
+        this.config.getConfig().vote.party.goal = amount;
         this.config.saveConfig();
     }
 
     public int getMax() {
-        return this.config.getConfig().party.goal;
+        return this.config.getConfig().vote.party.goal;
     }
 
     public void execute() {
         LoreVoter.logger.info("VoteParty Rewards Executed!");
 
-        List<String> rewards = this.config.getConfig().party.rewards;
+        List<String> rewards = this.config.getConfig().vote.party.rewards;
         for (String reward : rewards) {
             LoreVoter.plugin.getServer().dispatchCommand(LoreVoter.plugin.getServer().getConsoleSender(), reward);
         }

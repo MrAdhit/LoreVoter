@@ -22,7 +22,7 @@ public class VotePartyCacheFile {
 
     private VotePartyCacheFile() {
         try {
-            this.cacheFile = new File(LoreVoter.plugin.getDataFolder(), config.getConfig().party.cache_file);
+            this.cacheFile = new File(LoreVoter.plugin.getDataFolder(), config.getConfig().vote.party.cache_file);
             this.cacheFile.getParentFile().mkdirs();
             this.cacheFile.createNewFile();
 

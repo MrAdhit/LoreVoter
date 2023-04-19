@@ -17,7 +17,7 @@ public class VoteRewardManager {
     public void execute() {
         LoreVoter.logger.info("Gifting vote rewards to " + this.username);
 
-        List<String> rewards = config.getConfig().player.rewards;
+        List<String> rewards = config.getConfig().vote.player.rewards;
         for (String reward : rewards) {
             String processor = reward.replaceAll("\\{username}", this.username);
             LoreVoter.plugin.getServer().dispatchCommand(LoreVoter.plugin.getServer().getConsoleSender(), processor);
