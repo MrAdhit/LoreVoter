@@ -53,7 +53,7 @@ public final class LoreVoter extends JavaPlugin {
 
         try {
             LiteralCommandNode<?> lorevoteCompletion = CommodoreFileReader.INSTANCE.parse(plugin.getResource("lorevote.commodore"));
-            commodore.register(lorevoteCompletion);
+            commodore.register(lorevoteCommand, lorevoteCompletion);
         } catch (IOException e) {
             e.printStackTrace();
         }
