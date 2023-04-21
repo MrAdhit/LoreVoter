@@ -1,12 +1,21 @@
 lorevote {
     party {
         set {
-            amount {
-                amount brigadier:integer;
-            }
+            amount brigadier:integer;
         }
         query;
         trigger;
     }
+    player {
+        player brigadier:string single_word {
+            set {
+                amount brigadier:integer;
+            }
+            add;
+            sub;
+            query;
+        }
+    }
+    broadcast;
     reload;
 }

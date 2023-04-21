@@ -1,5 +1,21 @@
+[vote]
+output = """
+List Link
+- &b&lhttps://www.google.com&r
+- &c&lhttps://ur-mom.com&r
+- &0&lhttps://nig.ga&r
+- &f&lhttps://twitch.tv&r
+- &b&l&nhttps://vote.lorest.one&r
+- &9Me &r{and} &dYou
+Also, a little reminder
+ur vote is just %lorevote_player_amount%, vote more lah
+"""
+
+[vote.broadcast]
+message = "Helo fren, im under de water, yor vote karenli is %lorevote_player_amount%"
+interval = 200 # as in ticks, https://mapmaking.fr/tick/
+
 [vote.player]
-cache_file = "cache/savedvoter.bin"
 rewards = [
     "give {username} wooden_sword",
     "give {username} dirt"
@@ -7,7 +23,6 @@ rewards = [
 
 [vote.party]
 goal = 22
-cache_file = "cache/voteparty.bin"
 rewards = [
     "give @a wooden_sword",
     "give @a dirt"
@@ -19,4 +34,4 @@ rewards = [
 90 = ["give {username} dirt"]
 
 [broadcast]
-message = "&c&l{username}&r just voted using &a&l{service}"
+message = "&c&l{username}&r just voted using &a&l{service} &r{and} their vote is now %lorevote_player_amount%"

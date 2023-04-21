@@ -9,3 +9,5 @@ commands:
   lorevote:
     description: LoreVoter plugin commands
     permission: lorevote.admin
+  vote:
+    description: Get list vote link

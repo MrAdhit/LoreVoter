@@ -2,6 +2,7 @@ package com.mradhit.lorevoter;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mradhit.lorevoter.command.LoreVoteCommand;
+import com.mradhit.lorevoter.command.VoteCommand;
 import com.mradhit.lorevoter.file.LoreVoterConfigFile;
 import com.mradhit.lorevoter.file.VoterCacheFile;
 import com.mradhit.lorevoter.listener.PlayerJoinListener;
@@ -9,10 +10,13 @@ import com.mradhit.lorevoter.listener.VotePartyListener;
 import com.mradhit.lorevoter.listener.VotifierListener;
 import com.mradhit.lorevoter.manager.VotePartyManager;
 import com.mradhit.lorevoter.placeholder.LoreVoterExpansion;
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.lucko.commodore.Commodore;
 import me.lucko.commodore.CommodoreProvider;
 import me.lucko.commodore.file.CommodoreFileReader;
+import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -39,6 +43,9 @@ public final class LoreVoter extends JavaPlugin {
 
         new LoreVoterExpansion().register();
 
+        PluginCommand voteCommand = plugin.getCommand("vote");
+        voteCommand.setExecutor(new VoteCommand());
+
         PluginCommand lorevoteCommand = plugin.getCommand("lorevote");
         lorevoteCommand.setExecutor(new LoreVoteCommand());
 
@@ -46,10 +53,16 @@ public final class LoreVoter extends JavaPlugin {
 
         try {
             LiteralCommandNode<?> lorevoteCompletion = CommodoreFileReader.INSTANCE.parse(plugin.getResource("lorevote.commodore"));
-            commodore.register(lorevoteCommand, lorevoteCompletion);
+            commodore.register(lorevoteCompletion);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.sendMessage(PlaceholderAPI.setPlaceholders(player, LoreVoterConfigFile.getInstance().getConfig().vote.broadcast.message));
+            }
+        }, 0, LoreVoterConfigFile.getInstance().getConfig().vote.broadcast.interval);
 
         logger.info("Plugin loaded!");
     }

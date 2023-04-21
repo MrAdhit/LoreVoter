@@ -5,24 +5,24 @@ import com.mradhit.lorevoter.LoreVoter;
 import java.io.*;
 import java.util.HashMap;
 
-public class VoterCacheFile {
-    private static VoterCacheFile INSTANCE;
+public class PlayerVoteCacheFile {
+    private static PlayerVoteCacheFile INSTANCE;
     private static final LoreVoterConfigFile config = LoreVoterConfigFile.getInstance();
 
     public HashMap<String, Integer> cache;
     private File cacheFile;
 
-    public static VoterCacheFile getInstance() {
+    public static PlayerVoteCacheFile getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new VoterCacheFile();
+            INSTANCE = new PlayerVoteCacheFile();
         }
 
         return INSTANCE;
     }
 
-    private VoterCacheFile() {
+    private PlayerVoteCacheFile() {
         try {
-            this.cacheFile = new File(LoreVoter.plugin.getDataFolder(), "cache/savedvoter.bin");
+            this.cacheFile = new File(LoreVoter.plugin.getDataFolder(), "cache/playervote.bin");
             this.cacheFile.getParentFile().mkdirs();
             this.cacheFile.createNewFile();
 

@@ -63,13 +63,11 @@ public class LoreVoterConfigFile {
 
     public static class VotePlayer {
         public List<String> rewards = Arrays.asList("give {username} wooden_sword", "give {username} dirt");
-        String cache_file = "cache/savedvoter.bin";
     }
 
     public static class VoteParty {
         public int goal = 20;
         public List<String> rewards = Arrays.asList("give @a wooden_sword", "give @a dirt");
-        String cache_file = "cache/voteparty.bin";
         public HashMap<Integer, List<String>> chance_rewards = new HashMap<>();
     }
 
@@ -77,7 +75,14 @@ public class LoreVoterConfigFile {
         public String message = "&c&l{username}&r just voted using &a&l{service}";
     }
 
+    public static class VoteBroadcast {
+        public String message;
+        public int interval;
+    }
+
     public static class Vote {
+        public String output;
+        public VoteBroadcast broadcast = new VoteBroadcast();
         public VotePlayer player = new VotePlayer();
         public VoteParty party = new VoteParty();
     }
