@@ -1,5 +1,6 @@
 package com.mradhit.lorevoter.command;
 
+import com.mradhit.lorevoter.LoreVoter;
 import com.mradhit.lorevoter.file.LoreVoterConfigFile;
 import com.mradhit.lorevoter.manager.PlayerVoteManager;
 import com.mradhit.lorevoter.manager.VotePartyManager;
@@ -9,9 +10,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import static com.mradhit.lorevoter.LoreVoter.plugin;
-import static com.mradhit.lorevoter.LoreVoter.task;
 
 public class LoreVoteCommand implements CommandExecutor {
     @Override
@@ -23,8 +21,9 @@ public class LoreVoteCommand implements CommandExecutor {
             if (sub.equalsIgnoreCase("reload")) {
                 sender.sendMessage("Reloading config");
                 LoreVoterConfigFile.getInstance().reloadConfig();
-                task.cancel();
-                task = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+
+                LoreVoter.task.cancel();
+                LoreVoter.task = Bukkit.getScheduler().runTaskTimer(LoreVoter.plugin, () -> {
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         player.sendMessage(PlaceholderAPI.setPlaceholders(player,
                                 LoreVoterConfigFile.getInstance().getConfig().vote.broadcast.message));
